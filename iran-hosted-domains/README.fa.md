@@ -1,0 +1,650 @@
+<div dir=rtl>
+
+# دامنه‌های میزبانی شده در ایران
+
+- [English Document](README.md)
+
+بسیاری از سرویس‌ها و دامنه‌های خارج از ایران سانسور و مسدود شده‌اند و باید برای دسترسی به آن‌ها از VPN و Proxy هایی با امنیت بالا استفاده کنیم، جدای از این مسئله دسترسی به بعضی سرویس‌های ایرانی از طریق IP خارجی مسدود شده است. حال برای رد کردن این سرویس ها لیستی از دامنه‌های داخلی را جمع کرده‌ایم تا با اضافه کردن آن‌ به کلاینت‌های مورد استفاده، دیگر نیاز به قطع کردن VPN برای دسترسی به سرویس‌های داخلی نباشد.
+
+## سلب مسئولیت
+
+این مخزن فهرستی گردآوری شده از منابع عمومی و در دسترس مردم در مورد وب سایت های میزبانی شده در ایران است. این فقط برای مقاصد اطلاعات عمومی در نظر گرفته شده است و برای ارائه راهنمایی در مورد نحوه اتصال یا ایجاد یا مدیریت یک شبکه خصوصی مجازی (VPN) در نظر گرفته **نشده** است. محتوای این مخزن همانطور که هست ارائه شده است و ما هیچ گونه اظهارنظر یا ضمانتی، صریح یا ضمنی، در مورد کامل بودن، دقت، قابلیت اطمینان، مناسب بودن یا در دسترس بودن اطلاعات موجود در این مخزن نداریم. هر گونه اتکای شما به چنین اطلاعاتی کاملاً به عهده شماست. ما مسئولیتی در قبال خطاها یا حذفیات در اطلاعات یا هر گونه ضرر، خسارت یا سایر تعهدات ناشی از استفاده از آن نخواهیم داشت. لطفاً قبل از استفاده از هر گونه اطلاعات این مخزن احتیاط کنید و با یک متخصص واجد شرایط مشورت کنید.
+
+## روش استفاده
+
+بسته به اینکه از کدام کلاینت استفاده می‌کنید، ممکن است متفاوت باشد. لیست دامنه‌ها و فایل‌های مربوط را می‌توانید از [این صفحه][link-release] دریافت کنید.  
+ برای مرور سریع فایل‌های رلیز شده در این مخزن می‌توانید به بخش [فایل‌ها](#فایل-ها) مراجعه کنید.  
+برای سیستم routing بهتر در کلاینت‌های v2ray/Xray شما می‌توانید پارامتر `Domain Resolution Strategy` را به `IPIfNonMatch` برای مسیریابی بهتر یا `AsIs` برای کارایی بیشتر تغییر دهید. اطلاعات بیشتر را می‌توانید در [#83](https://github.com/bootmortis/iran-hosted-domains/issues/83) مشاهده کنید.
+
+### `iran.dat`/`iran-geosite.db` general rules
+
+فایل `iran.dat` را می توان در کلاینت های v2fly، v2ray و xray استفاده کرد. به طور مشابه، هسته های مربوط به SingBox می‌توانند از فایل `iran-geosite.db` استفاده کنند.
+
+1. فایل `iran.dat` را از [این صفحه][link-release] دانلود کنید.
+2. فایل را در کلاینت خود کپی و یا وارد کنید.  
+   به عنوان مثال:
+   - v2ray macOS: `/usr/local/share/v2ray`
+3. قوانین مناسب را اضافه کنید:
+   - `ext:iran.dat:all` در بخش bypass
+   - `ext:iran.dat:ads` در بخش block
+4. اتصال خود را قطع و وصل کنید.
+
+#### دسته بندی کامل
+
+- دسته بندی `ir`: دامنه‌های `.ir` دستچین شده. استفاده به عنوان `direct`.
+- دسته بندی `other`: دامنه‌های غیر `.ir`. استفاده به عنوان `direct`.
+- دسته بندی `tld-ir`: همه دامنه‌های `.ir`. استفاده به عنوان `direct`.
+- دسته بندی `all`: ترکیبی از `other` و `tld-ir`. استفاده به عنوان `direct`.
+- دسته بندی `ads`: خدمات تبلیغاتی مرتبط با ایران که باید `block` شوند.
+- دسته بندی `proxy`: دامنه‌های مرتبط با ایران که در داخل ایران مسدود شده‌اند و باید `proxy` شوند.
+
+<table>
+  <tr>
+    <td> <img align="right" width="400" src="assets/v2ray.png"> </td>
+  </tr>
+</table>
+
+### [Qv2ray](https://github.com/Qv2ray/Qv2ray)
+
+شما می‌توانید فایل qv2ray_schema.json را در [این صفحه][link-release] پیدا کنید.
+
+1. فایل را دانلود کنید.
+2. در بخش `preferences` بر روی `Advanced Route Settings` کلیک کنید.
+3. در پایین صفحه، بر روی `import schema...` کلیک کنید.
+4. فایل qv2ray_schema.json دانلود شده را انتخاب کنید.
+5. در کادر باز شده بر روی yes کلیک کنید.
+6. بر روی OK کلیک کنید.
+
+<table>
+  <tr>
+    <td> <img width="400" src="assets/qv2ray.png"> </td>
+  </tr>
+</table>
+    
+### [SagerNet](https://github.com/SagerNet/SagerNet) / [Matsuri](https://github.com/MatsuriDayo/Matsuri)
+
+1. فایل `iran.dat` را از [این صفحه][link-release] دانلود کنید.
+2. فایل را از طریق `Route -> Three dots -> Manage Route Assets` به کلاینت اضافه کنید.
+3. از بخش `Route -> Create Route` قوانین زیر را اضافه کنید:
+</div>
+
+- Block Ads:
+  - domain: `geosite:category-ads-all`
+  - outbound: `Block`
+- Block Iran Ads:
+  - domain: `ext:iran.dat:ads`
+  - outbound: `Block`
+- Bypass Iran Domains:
+  - domain: `ext:iran.dat:all`
+  - outbound: `Bypass`
+- Bypass Iran geoip:
+  - ip: `geoip:ir`
+  - outbound: `Bypass`
+
+<div dir=rtl>
+
+> برای مشاهده‌ی اسکرین شات از قوانین بالا [اینجا کلیک کنید](https://imgur.com/a/SEq1Bvg).
+
+4. اتصال خود را قطع و وصل کنید.
+
+<table>
+  <tr>
+    <td> <img align="right" src="assets/sagernet.png"> </td>
+  </tr>
+</table>
+
+### [NekoBox](https://github.com/MatsuriDayo/NekoBoxForAndroid)
+
+1. فایل `iran-geosite.db` را از [این صفحه][link-release] دانلود کنید.
+2. نام فایل را به `geosite.db` تغییر دهید.
+3. فایل را از طریق `Route -> Three dots -> Manage Route Assets` به کلاینت اضافه کنید.
+4. از بخش `Route -> Create Route` قوانین زیر را اضافه کنید:
+</div>
+
+- Block Iran Ads:
+  - domain: `geosite:ads`
+  - outbound: `Block`
+- Bypass Iran Domains:
+  - domain: `geosite:all`
+  - outbound: `Bypass`
+- Bypass Iran geoip:
+  - ip: `geoip:ir`
+  - outbound: `Bypass`
+
+<div dir=rtl>
+
+5. اتصال خود را قطع و وصل کنید.
+
+⚠️ مهم: با اینکار فایل پیش‌فرض geosite با `iran-geosite.db` جایگذاری می‌شود و دسته بندی‌های geosite پیش‌فرض مثل `category-ads-all` قابل استفاده نیستند. با آپدیت کردن `geosite.db` از طریق `Manage Route Assets` می‌توانید دوباره از geosite پیش‌فرض استفاده کنید.
+
+### [Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118)
+
+1. فایل `shadowrocket.conf` را دانلود کنید.
+2. در اپلیکیشن بر روی `Import From Cloud` کلیک کرده و فایل مربوط را اضافه کنید.
+3. در نهایت، بر روی `shadowrocket.conf`کلیک کرده و `Use Config` را انتخاب کنید.
+
+<table>
+  <tr>
+    <td>  <img align="right" height="400" src="assets/shadowrocket1.png"> </td>
+    <td>  <img align="right" height="400" src="assets/shadowrocket2.png"> </td>
+   </tr>
+  </tr>
+</table>
+
+### [Clash](https://github.com/Dreamacro/clash) (Like [ClashX](https://github.com/yichengchen/clashX) / [clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg) / [Clash Verge](https://github.com/zzzgydi/clash-verge) / ...)
+
+1. مطمئن شوید که حداقل از ورژن `2023.04.13` [Clash Premium](https://github.com/Dreamacro/clash/releases/tag/premium) Core یا ورژن `1.14.4` [Clash.Meta](https://github.com/MetaCubeX/Clash.Meta) Core استفاده می‌کنید. در غیر این صورت از فرمت نسخه‌ی قدیمی که در مرحله‌ی سوم توضیح داده شده‌است استفاده کنید.
+2. صفحه‌ی پروفایل/تنظیمات فعلی خود را که استفاده می‌کنید باز کنید.
+3. این خطوط را به فایل اضافه کنید:
+
+```yaml
+rule-providers:
+  iran_other:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.txt"
+    path: ./ruleset/iran_other.txt
+    interval: 432000
+  iran_ads:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.txt"
+    path: ./ruleset/iran_ads.txt
+    interval: 432000
+```
+
+⚠️ نکته: اگر از نسخه‌های قدیمی تر Clash Core استفاده می‌کنید بجای خطوط بالا این خطوط را به فایل اضافه کنید:
+
+```yaml
+rule-providers:
+  iran_other:
+    type: http
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_other.yaml"
+    path: ./ruleset/iran_other.yaml
+    interval: 432000
+  iran_ads:
+    type: http
+    behavior: domain
+    url: "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.yaml"
+    path: ./ruleset/iran_ads.yaml
+    interval: 432000
+```
+
+4. سپس خط‌های زیر را به بخش قوانین `Rules` اضافه کنید:
+
+```yaml
+- RULE-SET,iran_ads,REJECT
+- DOMAIN-SUFFIX,ir,DIRECT
+- RULE-SET,iran_other,DIRECT
+- GEOIP,IR,DIRECT
+```
+
+5. فایل را ذخیره کنید.
+6. بستگی به نوع کلاینت، ممکن است لازم باشد نرم‌افزار را روی حالت `Rule‍` تنظیم کنید.
+
+### [Surge](https://nssurge.com) / [Surfboard](https://getsurfboard.com)
+
+1. صفحه‌ی پروفایل/تنظیمات فعلی خود را که استفاده می‌کنید باز کنید.
+2. سپس خط‌های زیر را به بخش قوانین `[Rule]` اضافه کنید:
+
+```INI
+DOMAIN-SET,https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/surge_domainset_ads.txt,REJECT,update-interval=432000
+DOMAIN-SUFFIX,ir,DIRECT
+DOMAIN-SET,https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/surge_domainset_other.txt,DIRECT,update-interval=432000
+GEOIP,IR,DIRECT
+```
+
+> سرف برد update-interval را نادیده می‌گیره، بجاش می‌تونید از طریق Tools> External resources لیست دامنه‌ها را آپدیت کنید.
+
+⚠️ نکته: اگر از نسخه‌های قدیمی‌تر از Surge for Mac v3.5.1/Surge for iOS v4.2.2 استفاده می‌کنید به‌جای DOMAIN-SET از RULE-SET استفاده کنید:
+
+```INI
+RULE-SET,https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/surge_ruleset_ads.txt,REJECT,update-interval=432000
+DOMAIN-SUFFIX,ir,DIRECT
+RULE-SET,https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/surge_ruleset_other.txt,DIRECT,update-interval=432000
+GEOIP,IR,DIRECT
+```
+
+3. فایل را ذخیره کنید.
+4. قسمت 'Outbound Mode' را روی 'Rule-based' ست کنید.
+
+⚠️ نکته: اگر وبسایت‌های فیلتر شده تو حالت 'Rule-based' کار نمی‌کنن این قانون را قبل از قانون 'FINAL' اضافه کنید.
+
+```INI
+DOMAIN-KEYWORD,,YourFinalProxy/ProxyGroup,force-remote-dns
+```
+
+> به‌جای YourFinalProxy/ProxyGroup پروکسی/گروه پروکسی خودتان را وارد کنید.
+
+🚨 از DOMAIN-SET و RULE-SET در [Loon](https://www.nsloon.com) / [LanceX](https://lancex.org) هم می‌تونید استفاده کنید.
+
+### [v2rayNG](https://github.com/2dust/v2rayNG)
+
+📽️ [آموزش ویدیویی](https://imgur.com/8qS5ILD)
+
+1. ابتدا `iran.dat` را از [اینجا][link-release] دانلود کنید.
+2. از منو، به قسمت `Geo asset files` بروید، `+` را از بالا فشار دهید و فایل `iran.dat` را انتخاب کنید.
+3. از منو، به `Settings` بروید و مطمئن شوید که `Domain Strategy` روی `IpIfNonMatch` تنظیم شده است.
+4. به بخش `Custom rules` در `Settings` بروید.
+
+- در تب `DIRECT URL OR IP`، عبارت `ext:iran.dat:all,geoip:ir` را بنویسید، سپس `🗸` را از بالا فشار دهید.
+- در تب `BLOCKED URL OR IP` عبارت `ext:iran.dat:ads` را بنویسید و دوباره از بالا `🗸` را فشار دهید.
+
+4. دکمه‌ی بازگشت را بزنید و تمام.
+
+### [V2Ray Server](https://www.v2ray.com/en/configuration/routing.html)
+
+برای مسدود سازی دامنه‌ها و IP های داخلی در سمت سرور لطفا به [این آموزش][link-v2ray-server-block] مراجعه کنید (همچنین حتما [#58](/../../issues/58) را نیز بررسی کنید).
+
+### [Nekoray](https://github.com/MatsuriDayo/nekoray)
+
+:warning: نکوری میتواند از هر دو هسته sing-box و Xray استفاده کند. لطفا از قوانین مسیریابی مربوطه بر اساس هسته انتخابی خود در نکوری استفاده کنید.
+
+:information_source: میتوانید با رفتن به `Preferences` > `Basic Settings` > `Core` هسته فعلی مورد استفاده خود را ببینید.
+
+- #### [sing-box core](#sing-box-core)
+
+1. فایل `iran-geosite.db` را از [بخش ریلیز][link-release] دانلود کنید.
+2. آن را به `geosite.db` تغییر نام دهید.
+3. فایل `geosite.db` را در پوشه nekoray به `backup-geosite.db` تغییرنام دهید.
+4. فایل `geosite.db` دانلودی را به پوشه nkoray انتقال دهید.
+5. روی `Preferences` کلیک کنید و سپس `Routing Setting` را انتخاب کنید.
+6. به سربرگ `Simple Route` بروید.
+7. خطوط زیر را در قسمت های مربوطه کپی کنید:
+
+- `Direct, IP`
+
+```
+geoip:ir
+geoip:private
+```
+
+- `Direct, Domain`
+
+```
+geosite:all
+```
+
+- `Block, Domain`
+
+```
+geosite:ads
+```
+
+8. روی Ok کلیک کنید و برنامه را دوباره اجرا کنید.
+
+⚠️ مهم: با اینکار دسته بندی‌های geosite پیش‌فرض مثل `category-ads-all` قابل استفاده نیستند. برای برگشتن به geosite پیشفرض، فایل `geosite.db` فعلی را حذف کرده و `backup-geosite.db` را به `geosite.db` تغییر نام دهید. همچنین می‌توانید از [sing-geosite](https://github.com/SagerNet/sing-geosite/releases) نسخه اصلی `geosite.db` را دانلود کنید.
+
+  <table>
+   <tr>
+    <td> <img align="right" width="400" src="assets/nekoray-sing-box.png"> </td>
+   </tr>
+  </table>
+
+- #### [Xray core](#Xray-core)
+
+1. فایل `iran.dat` را از [بخش ریلیز][link-release] دانلود کنید.
+2. فایل `iran.dat` را در پوشه Nekoray کپی کنید.
+3. روی `Preferences` کلیک کنید و سپس `Routing Setting` را انتخاب کنید.
+4. به سربرگ `Simple Route` بروید.
+5. خطوط زیر را در قسمت های مربوطه کپی کنید:
+
+- `Direct, IP`
+
+```
+geoip:ir
+geoip:private
+```
+
+- `Direct, Domain`
+
+```
+ext:iran.dat:all
+```
+
+- `Block, Domain`
+
+```
+ext:iran.dat:ads
+```
+
+6.  روی Ok کلیک کنید و برنامه را دوباره اجرا کنید.
+
+   <table>
+    <tr>
+     <td> <img align="right" width="400" src="assets/nekoray-xray.png"> </td>
+    </tr>
+   </table>
+  
+### [v2rayN](https://github.com/2dust/v2rayN)
+
+1. ابتدا فایل `iran.dat` را از [این صفحه][link-release] دانلود کنید و در محل نصب برنامه `v2rayN` در پوشه `bin` قرار دهید.
+2. سپس `v2rayN` را باز کنید و روی `Setting` کلیک کنید و گزینه `RoutingSetting` را انتخاب کنید.
+3. سپس در پنجره جدید روِی `Advance Function` کلیک کنید و گزینه `Add` را انتخاب کنید.
+4. در پنجره جدید در قسمت `Remarks` یک نام انتخاب کنید و در قسمت `Rule List` در قسمت خالی راست کلیک کرده و گزینه `Rule Add` را انتخاب کنید.
+5. در پنجره جدید در قسمت `OutboundTag` گزینه `Direct` را انتخاب کنید و سپس در قسمت `Domains` عبارت `ext:iran.dat:all$` را کپی کنید.
+6. بر روی گزینه `Confirm` کلیک کنید تا به صفحه اصلی برنامه برگردید.
+7. مطمن شوید که از پایین برنامه فسمت `Routing` نام rule انتخابی شما وارد شده است. درغیر اینصورت فلش رو به پایین سمت راست آنرا بزنید و نام rule انتخابی خود را انتخاب کنید.
+
+### [SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega)
+
+1. تنظیمات SwitchyOmega را باز کنید.
+2. به قسمت `auto switch` یا هر پروفایل دیگه ای از نوع Switch که استفاده میکنید برید.
+3. تیک `Rule list rules` را بزنید و Direct را به عنوان پروفایل برایش انتخاب کنید.
+4. پروکسی خود را برای پروفایل قانون `Default` انتخاب کنید.
+5. گزینه `Switchy` را برای `Rule List Format` انتخاب کنید.
+6. لینک زیر را در قسمت `Rule List URL` وارد کنید.
+
+```
+https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/switchy_omega.sorl
+```
+
+7. گزینه `Download Profile Now` را بزنید.
+8. تغییرات را با `Apply Changes` ذخیره کنید.
+9. حالت SwitchyOmega را روی `auto switch` یا هر پروفایل دیگه ای که از نوع Switch تعریف کردید بذارید.
+   > برای آپدیت کردن لیست قوانین، قسمت 7 را دوباره تکرار کنید.
+
+### [Sing-Box](https://github.com/SagerNet/sing-box)
+
+#### فرمت `geosite.srs`
+
+فایل کانفیگ sing-box را باز کنید و بخش Route را در این [فرمت](https://sing-box.sagernet.org/configuration/rule-set/) ویرایش کنید:
+```json
+{
+  "route": {
+    "rule_set": [
+      {
+        "tag": "iran-geosite-ads",
+        "type": "remote",
+        "format": "binary",
+        "update_interval": "7d",
+        "url": "https://github.com/bootmortis/sing-geosite/releases/latest/download/geosite-ads.srs"
+      },
+      {
+        "tag": "iran-geosite-all",
+        "type": "remote",
+        "format": "binary",
+        "update_interval": "7d",
+        "url": "https://github.com/bootmortis/sing-geosite/releases/latest/download/geosite-all.srs"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": [
+          "iran-geosite-ads"
+        ],
+        "outbound": "block"
+      },
+      {
+        "rule_set": [
+          "iran-geosite-all"
+        ],
+        "outbound": "direct"
+      }
+    ]
+  }
+}
+```
+#### فرمت `geosite.db`
+
+⚠️نکته: این فرمت قدیمی شده و ممکن است در نسخه های آینده پشتیبانی نشود، برای مهاجرت به نسخه‌ی جدید [اینجا](https://sing-box.sagernet.org/migration/#migrate-geosite-to-rule-sets) و برای اطلاعات بیشتر [اینجا](https://github.com/bootmortis/iran-hosted-domains/issues/180)  را ببینید.
+
+1. فایل `iran-geosite.db` را از [اینجا][link-release] دانلود کرده و در پوشه sing-box قرار دهید.
+2. فایل کانفیگ sing-box را باز کنید و بخش Route را در این [فرمت](https://sing-box.sagernet.org/configuration/route/geosite/) ویرایش کنید:
+
+```json
+{
+  "route": {
+    "geosite": {
+      "path": "iran-geosite.db",
+      "download_url": "https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran-geosite.db"
+    },
+    "rules": [
+      {
+        "geosite": "all",
+        "outbound": "direct"
+      },
+      {
+        "geosite": "ads",
+        "outbound": "block"
+      },
+      {
+        "domain_suffix": [".ir"],
+        "outbound": "direct"
+      }
+    ]
+  }
+}
+```
+
+3. برای اطلاعات بیشتر در مورد قالب کانفیگ sing-box [اینجا را ببینید](https://sing-box.sagernet.org/configuration/).
+
+### [Hysteria](https://github.com/apernet/hysteria)
+
+1. با توجه به نیازتون `hysteria_client.acl`یا `hysteria_server.acl` را از [اینجا][link-release] دانلود کنید.
+
+   - hysteria_client.acl : بلاک کردن تبلیغات ایرانی و بای پس کردن دامنه/آیپی‌های ایران (برای کلاینت)
+   - hysteria_server.acl : بلاک کردن تمام دامنه/آیپی‌های ایران (برای سرور)
+
+2. این خط‎ ها را به کانفیگ خودتون اضافه کنید:
+
+```json
+    "acl": "acl_file_path",
+    "mmdb": "GeoLite2-Country.mmdb"
+```
+
+> 'acl_file_path': محل فایل
+
+### [OpenWrt Pass Wall](https://github.com/xiaorouji/openwrt-passwall)
+
+فقط با هسته Xray تست شده است. (با هسته v2ray هم ممکن است کار کند)
+
+1. فایل `iran.dat` را از [اینجا][link-release] دانلود کنید.
+
+```shell
+  curl -LO https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
+```
+
+2. فایل `iran.dat` را به دایرکتوری `/usr/share/v2ray/` منتقل کنید. (شما می توانید دایرکتوری صحیح را در د`Pass Wall -> Rule Manage -> Location of V2ray/Xray asset`ببینید)
+
+```shell
+mv iran.dat /usr/share/v2ray/
+```
+
+3. قوانین shunt زیر را در بخش `Pass Wall -> Rule Manage -> Shunt Rules` به همین ترتیب ایجاد کنید:
+
+</div>
+
+1.  `Block`:
+    - Remarks: `Block`
+    - Domain: `ext:iran.dat:ads`
+2.  `Proxy`:
+    - Remarks: `Proxy`
+    - Domain: `ext:iran.dat:proxy`
+3.  `Direct`:
+    - Remarks: `Direct`
+    - Domain: `ext:iran.dat:all`
+    - IP: `geoip:ir`
+
+<div dir=rtl>
+
+4. یک Node جدید در `Pass Wall -> Node List -> Add` با مشخصات زیر ایجاد کنید:
+
+</div>
+
+- Node Remarks: `Shunt`
+- Type: `Xray`
+- Protocol: `Shunt`
+- Block: `Blackhole`
+- Proxy: `Default`
+- Direct: `Direct Connection`
+- Default: یکی از سرور‌های خود را انتخاب کنید
+- Domain Strategy: `AsIs` برای کارایی بیشتر یا `IPIfNonMatch` برای دقت مسیر یابی بهتر.
+
+<div dir=rtl>
+
+5. به `Pass Wall -> Basic Settings -> Main` بروید و سپس:
+   </div>
+
+   - TCP Node: `[Shunt]`
+   - UDP Node: `Same as the tcp node`
+
+<div dir=rtl>
+
+- گزینه `Save & Apply` را بزنید.
+- همچنین به تب `DNS` رفته و `Clear IPSET` را بزنید.
+
+### [v2rayA](https://github.com/v2rayA/v2rayA)
+
+1. فایل `iran.dat` را از [اینجا][link-release] دانلود کنید و آن را در دایرکتوری assets قرار دهید.
+2. از قوانین زیر استفاده کنید ([اطلاعات بیشتر](https://v2raya.org/en/docs/manual/routinga/)):
+
+```
+default: proxy
+
+domain(ext:"iran.dat:ads")->block
+domain(ext:"iran.dat:proxy")->proxy
+domain(ext:"iran.dat:all")->direct
+ip(geoip:ir)->direct
+```
+
+## به‌روزرسانی فایل `iran.dat` به‌طور خودکار
+
+اطمینان حاصل کردن از داشتن آخرین نسخه فایل `iran.dat` ممکن است برای شما اهمیت داشته باشد. این بخش شما را در راه‌اندازی یک فرآیند خودکار برای به‌روزرسانی فایل راهنمایی خواهد کرد.
+
+### لینوکس
+
+#### پیش‌نیازها
+
+- باید `curl` و `shasum` را بر روی سیستم خود نصب داشته باشید.
+
+#### استفاده
+
+1. اسکریپت [update_iran_dat.sh](scripts/update_iran_dat.sh) را دانلود کنید. (اگر از ash استفاده می‌کنید، فایل [update_iran_dat.ash](scripts/update_iran_dat.ash) را دانلود کنید.)
+   ```shell
+   curl -LO https://raw.githubusercontent.com/bootmortis/iran-hosted-domains/main/scripts/update_iran_dat.sh
+   ```
+2. با استفاده از دستور زیر اسکریپت را اجرایی کنید:
+   ```shell
+   chmod +x update_iran_dat.sh
+   ```
+3. با اجرای دستور زیر، فایل crontab را باز کنید:
+   ```shell
+   crontab -e
+   ```
+4. در ویرایشگر crontab، خط زیر را اضافه کنید تا اسکریپت هر سه‌شنبه اجرا شود (یک روز پس از به‌روزرسانی فایل `iran.dat`):
+   ```shell
+   0 0 * * 2 /path/to/update_iran_dat.sh /path/to/iran.dat
+   ```
+   مطمئن شوید که `/path/to/update_iran_dat.sh` را با مسیر واقعی اسکریپت در سیستم خود و `/path/to/iran.dat` را با مسیر واقعی فایل `iran.dat` که می‌خواهید به‌روزرسانی کنید، جایگزین کرده‌اید.
+5. فایل crontab را ذخیره کرده و ویرایشگر را ببندید.
+
+### ویندوز
+
+#### پیش‌نیازها
+
+- به دلیل فاقد امضا بودن فایل اسکریپت، برای اجرای صحیح آن نیاز به تغییر تنظیمات `ExecutionPolicy` می‌باشد.
+- برای این انجام این تغییر، یک پنجره `Powershell` را با دسترسی `Administrator` باز نموده و دستور زیر را در آن اجرا نمایید:
+  ```powershell
+  Set-ExecutionPolicy unrestricted
+  ```
+
+#### استفاده
+
+1. اسکریپت [update_iran_dat.ps1](scripts/update_iran_dat.ps1) را دانلود کنید و آن را در محل مناسبی (مثلا در کنار فایل `iran.dat`) قرار دهید.
+
+2. یک پنجره `cmd` با دسترسی `Administrator` باز کرده و فرمان زیر را در آن اجرا کنید:
+   ```cmd
+   SCHTASKS /CREATE /SC WEEKLY /D TUE /TN "UPDATE IRAN.DAT" /TR "powershell -File '<path\to\update_iran_dat.ps1>' '<path\to\iran.dat>'" /ST 19:00
+   ```
+   مطمئن شوید که `<path\to\update_iran_dat.ps1>` را با مسیر واقعی اسکریپت در سیستم خود و `<path\to\iran.dat>` را با مسیر واقعی فایل `iran.dat` که می‌خواهید به‌روزرسانی کنید، جایگزین کرده‌اید.
+
+اسکریپت فرآیند به‌روزرسانی فایل `iran.dat` را انجام می‌دهد. ابتدا بررسی می‌کند که فایل از قبل وجود دارد و مقدار checksum فایل فعلی را با آخرین نسخه موجود در مخزن مقایسه می‌کند. اگر نسخه جدیدی موجود باشد، فایل جدید را دانلود کرده و جایگزین فایل قبلی می‌کند. اگر فایل محلی وجود نداشته باشد، به سادگی آخرین نسخه را دانلود کرده و در مسیر مشخص شده ذخیره می کند.
+
+**توجه:** اسکریپت فرض می‌کند که شما دسترسی کافی برای نوشتن در پوشه‌ای که فایل `iran.dat` در آن قرار دارد، دارید. اگر با مشکلی مواجه شدید، اطمینان حاصل کنید که اسکریپت مجوز نوشتن مناسبی دارد یا اسکریپت را به‌صورت مطابق نیاز خود تغییر دهید.
+
+قبل از تنظیم cron job و SCHTASK، به صورت دستی اسکریپت را تست کنید و اطمینان حاصل کنید که به درستی اجرا می‌شود.
+
+## ایجاد دستی فایل .dat (آموزش)
+
+### ۱. نصب [golang](https://go.dev/doc/install)
+
+نصب کردن نسخه درست مهم است، همیشه آن را از [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community/blob/master/go.mod) بررسی کنید.
+
+### ۲. ایجاد Clone از [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
+
+```bash
+git clone https://github.com/v2fly/domain-list-community
+```
+
+### ۳. آماده‌سازی دامنه‌ها
+
+شما می‌توانید در یک فایل .dat هر چقدر که می‌خواهید گروه‌های متفاوت داشته باشید. هر کدام از این گروه‌ها می‌توانند در بخش bypass، proxy یا blocked باشند و هر چقدر که می‌خواهید دامنه داشته باشند.
+
+هر گروه یک فایل txt است که دامنه‌ها را شامل می‌شود. برای مثال، شما می‌توانید یک فایل ads.txt داشته باشید که شامل دامنه‌های تبلیغاتی می‌شود.
+
+### ۴. انتقال فایل‌ها به /data
+
+شما وقتی `domain-list-community‍` را Clone می‌کنید، هر چیزی که از قبل آن‌جا بود را هم Clone می‌کنید. از آنجایی که به آنها نیازی ندارید هر چیزی که در پوشه data است را پاک کنید.
+
+حالا شما باید فایل‌های خودتان را به پوشه data کپی کنید. مطمئن شوید که پسوند آن‌ها را حذف می‌کنید. برای مثال فایل `ads.txt` باید بشود `ads‍`.
+
+```bash
+cd domain-list-community
+rm data/*
+
+cp ~/ads.txt data/ads
+```
+
+### ۵. اجرای برنامه
+
+```bash
+go run ./ --outputdir=../
+```
+
+## فایل ها
+
+شما همیشه می توانید آخرین نسخه این فایل ها را در [صفحه انتشار][link-release] پیدا کنید.  
+شما می توانید روی نام برنامه کلیک کنید تا دستورالعمل های استفاده را ببینید.  
+همچنین، برای هر فایل، یک فایل `.sha256` وجود دارد که حاوی هش sha256 آن فایل است.
+
+- فایل‌های **clash_rules_ads.txt** و **clash_rules_ads.yaml** و **clash_rules_other.txt** و **clash_rules_other.yaml**: تمام تبلیغات و دامنه‌های غیر ir را برای [clash](#clash-like-clashx--clash_for_windows_pkg--clash-verge--) در دو فرمت مختلف شامل می شود.
+- فایل **domains.txt**: تمام وب سایت های میزبانی شده در ایران را شامل می شود.
+- فایل‌های **hysteria_client.acl** و **hysteria_server.acl**: بخش [Hysteria](#hysteria) را ببینید.
+- فایل **iran-geosite.db**: برای هسته sing-box بخش [Sing-Box](#sing-box) را ببینید.
+- فایل‌های **geosite-*.srs**: برای sing-box ورژن 1.8 به بعد، این فایل‌ها را می‌توانید از [این صفحه](https://github.com/bootmortis/sing-geosite/releases/latest) دریافت کنید.
+- فایل **iran.dat**: تمام وب سایت های میزبانی شده در ایران، تبلیغات و دامنه های مرتبط با پروکسی برای v2ray/xray را شامل می شود، برای اطلاعات بیشتر [دسته بندی های کامل](#دسته-بندی-کامل) را ببینید.
+- فایل **qv2ray_schema.json**: سناریوی json قابل وارد کردن که می تواند در [Qv2ray](#qv2ray) استفاده شود.
+- فایل **shadowrocket.conf:** فایل conf قابل وارد کردن که می تواند در [Shadowrocket](#shadowrocket) استفاده شود.
+- فایل‌های **surge_domainset_ads.txt**, **surge_domainset_other.txt**, **surge_ruleset_ads.txt** و **surge_ruleset_other.txt**: تمام تبلیغات و وب سایت های غیر ایرانی میزبانی شده در ایران را برای [Surge](#surge--surfboard) در دو فرمت مختلف شامل می شود.
+- فایل **switchy_omega.sorl**: دامنه ها را برای [SwitchyOmega](#switchyomega) شامل می شود.
+
+## منابع و گرامیداشت
+
+- دامنه‌های ایران:
+  - [سازمان فناوری اطلاعات ایران](https://eservices.ito.gov.ir/page/iplist) - [Mirror](https://github.com/bootmortis/ito-gov-mirror)
+  - [اینماد](https://enamad.ir/DomainListForMIMT) - [Mirror](https://github.com/bootmortis/enamad-mirror)
+  - [سامانه مدیریت اینترنت مشتریان شرکت مخابرات ایران](https://adsl.tci.ir/panel/sites)
+  - مخزن [V2fly Domain List Community](https://github.com/v2fly/domain-list-community) (لایسنس MIT)
+  - [جشنواره وب و موبایل ایران](https://directory.iwmf.ir/) - [Mirror](https://github.com/Chocolate4U/iwmf.ir-Mirror) (لایسنس MIT)
+  - [لیست شخصی][link-custom]
+- تبلیغات:
+  - مخزن [uBOPa - uBO Parsi filter list](https://github.com/nimasaj/uBOPa) (لایسنس MIT)
+
+اگر شما منابع دیگری می‌شناسید، و یا وب‌سایتی پیدا کرده‌اید که اینجا نیست لطفا یک
+[issue][link-issues] باز کنید و یا فایل [custom_domains.py][link-custom] را تغییر داده و [PR][link-pr] ایجاد کنید.
+
+## چگونه کار می کند؟
+
+به وسیله‌ی Github Action یک اسکریپت پایتون اجرا شده و از طریق منابع بالا فایل‌های مربوطه در صفحه‌ی رلیز ایجاد می‌شود.
+
+</div>
+
+[link-custom]: src/data/custom_domains.py
+[link-pr]: ../../pulls
+[link-issues]: ../../issues/new?assignees=&labels=enhancement&template=request-for-domain-addition-removal.md&title=Add%2FRemove+%60example.com%60
+[link-release]: ../../releases/latest
+[link-v2ray-server-block]: https://github.com/iranxray/hope/blob/main/routing.md#%D9%85%D8%B3%D8%AF%D9%88%D8%AF%D8%B3%D8%A7%D8%B2%DB%8C-%D8%A7%D8%B2-%D8%B3%D9%85%D8%AA-%D8%B3%D8%B1%D9%88%D8%B1

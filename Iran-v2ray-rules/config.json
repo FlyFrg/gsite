@@ -1,0 +1,394 @@
+{
+  "input": [
+    {
+      "type": "maxmindGeoLite2CountryCSV",
+      "action": "add",
+      "args": {
+        "country": "geolite2/GeoLite2-Country-Locations-en.csv",
+        "ipv4": "geolite2/GeoLite2-Country-Blocks-IPv4.csv",
+        "ipv6": "geolite2/GeoLite2-Country-Blocks-IPv6.csv"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "inputDir": "./ip2location"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ir",
+        "uri": "./messengers-ip.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ir",
+        "uri": "./ir-cdn/arvancloud.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ir",
+        "uri": "./ir-cdn/derakcloud.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ir",
+        "uri": "./ir-cdn/iranserver.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ir",
+        "uri": "./ir-cdn/parspack.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "inputDir": "./ir-cdn"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "cloudflare",
+        "uri": "./ipranges/cloudflare/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "cloudflare",
+        "uri": "./ipranges/cloudflare/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "google",
+        "uri": "./ipranges/google/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "google",
+        "uri": "./ipranges/google/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "amazon",
+        "uri": "./ipranges/amazon/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "amazon",
+        "uri": "./ipranges/amazon/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "microsoft",
+        "uri": "./ipranges/microsoft/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "microsoft",
+        "uri": "./ipranges/microsoft/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "bing",
+        "uri": "./ipranges/bing/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "github",
+        "uri": "./ipranges/github/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "github",
+        "uri": "./ipranges/github/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "facebook",
+        "uri": "./ipranges/facebook/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "facebook",
+        "uri": "./ipranges/facebook/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "twitter",
+        "uri": "./ipranges/twitter/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "twitter",
+        "uri": "./ipranges/twitter/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "telegram",
+        "uri": "./ipranges/telegram/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "telegram",
+        "uri": "./ipranges/telegram/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "oracle",
+        "uri": "./ipranges/oracle/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "digitalocean",
+        "uri": "./ipranges/digitalocean/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "digitalocean",
+        "uri": "./ipranges/digitalocean/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "linode",
+        "uri": "./ipranges/linode/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "linode",
+        "uri": "./ipranges/linode/ipv6_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "openai",
+        "uri": "./ipranges/openai/ipv4_merged.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "phishing",
+        "uri": "./phishing-ip.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "malware",
+        "uri": "./malware-ip.txt"
+      }
+    },
+    {
+      "type": "private",
+      "action": "add"
+    }
+  ],
+  "output": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputName": "geoip.dat"
+      }
+    },
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputName": "geoip-lite.dat",
+        "wantedList": ["ir", "private"]
+      }
+    },
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputName": "geoip-services.dat",
+        "wantedList": [
+          "arvancloud",
+          "derakcloud",
+          "iranserver",
+          "parspack",
+          "cloudflare",
+          "google",
+          "amazon",
+          "microsoft",
+          "bing",
+          "github",
+          "facebook",
+          "twitter",
+          "telegram",
+          "oracle",
+          "digitalocean",
+          "linode",
+          "openai"
+        ]
+      }
+    },
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputName": "security-ip.dat",
+        "wantedList": ["phishing", "malware"]
+      }
+    },
+    {
+      "type": "maxmindMMDB",
+      "action": "output",
+      "args": {
+        "outputName": "Country.mmdb",
+        "overwriteList": [
+          "ir",
+          "cloudflare",
+          "google",
+          "amazon",
+          "microsoft",
+          "bing",
+          "github",
+          "facebook",
+          "twitter",
+          "telegram",
+          "oracle",
+          "digitalocean",
+          "linode",
+          "openai",
+          "phishing",
+          "malware",
+          "private"
+        ]
+      }
+    },
+    {
+      "type": "maxmindMMDB",
+      "action": "output",
+      "args": {
+        "outputName": "Country-lite.mmdb",
+        "wantedList": ["ir", "private"]
+      }
+    },
+    {
+      "type": "maxmindMMDB",
+      "action": "output",
+      "args": {
+        "outputName": "Security-ip.mmdb",
+        "wantedList": ["phishing", "malware"]
+      }
+    },
+    {
+      "type": "maxmindMMDB",
+      "action": "output",
+      "args": {
+        "outputName": "Services.mmdb",
+        "wantedList": [
+          "arvancloud",
+          "derakcloud",
+          "iranserver",
+          "parspack",
+          "cloudflare",
+          "google",
+          "amazon",
+          "microsoft",
+          "bing",
+          "github",
+          "facebook",
+          "twitter",
+          "telegram",
+          "oracle",
+          "digitalocean",
+          "linode",
+          "openai"
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "action": "output"
+    }
+  ]
+}
