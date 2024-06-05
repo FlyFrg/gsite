@@ -1,0 +1,2 @@
+geosite:ir
+geosite:ru
