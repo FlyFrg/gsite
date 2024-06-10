@@ -1,0 +1,85 @@
+name: Build hiddify-geosite.dat
+permissions: write-all
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "**/README.md"
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout codebasegrep
+        uses: actions/checkout@v3
+        with:
+          path: code
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: code/go.mod
+      - name: update lists
+        run: |
+          cd code
+          echo "downloading from https://raw.githubusercontent.com/filteryab/filteryab/main/iran/blocked-in-iran"
+          curl -L -o data/hiddify-ir-filteryab https://raw.githubusercontent.com/filteryab/ir-blocked-domain/main/data/ir-blocked-domain
+          echo "downloading from https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/domains.txt"
+          curl -L -o data/hiddify-ir-iran-hosted-domains https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/domains.txt
+          echo "removing .ir domains"
+          grep -vE '\.ir$' data/hiddify-ir-iran-hosted-domains > 'data/hiddify-ir-iran-hosted-domains-!ir'
+          echo "Downloading from https://raw.githubusercontent.com/freedomofdevelopers/fod/master/domains"
+          curl -L -o data/hiddify-ir-sanction-list-fod https://raw.githubusercontent.com/freedomofdevelopers/fod/master/domains
+          echo "removing . from hiddify-ir-sanction-list-fod"
+          sed -i 's/^.//' data/hiddify-ir-sanction-list-fod
+          cd ..
+
+
+          
+          
+      - name: Set variables
+        run: |
+          echo "RELEASE_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Build hiddify-geosite.dat file
+        run: |
+          cd code || exit 1
+          go run ./ --outputdir=../ --exportlists=tld-ir,ir,gfw-ir,hiddify-sanction-ir,category-ads-all
+          cd ../ && rm -rf code
+
+      - name: Generate hiddify-geosite.dat sha256 hash
+        run: |
+          cp dlc.dat hiddify-geosite.dat
+          sha256sum hiddify-geosite.dat > hiddify-geosite.dat.sha256sum
+
+      - name: Generate Zip
+        run: |
+          zip -9 hiddify-geosite.dat.zip hiddify-geosite.dat
+          sha256sum hiddify-geosite.dat.zip > hiddify-geosite.dat.zip.sha256sum
+
+      - name: Generate XZ
+        run: |
+          xz -z -9 -k hiddify-geosite.dat
+          sha256sum hiddify-geosite.dat.xz > hiddify-geosite.dat.xz.sha256sum
+
+      - name: Git push assets to "release" branch
+        run: |
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b release
+          git add *.txt *.sha256sum hiddify-geosite.dat hiddify-geosite.dat.zip hiddify-geosite.dat.xz
+          git commit -m "${{ env.RELEASE_NAME }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f -u origin release
+
+
+      - name: Release and upload assets
+        run: |
+          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./hiddify-geosite.dat ./hiddify-geosite.dat.* ./dlc.dat
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

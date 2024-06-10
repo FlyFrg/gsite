@@ -1,0 +1,24 @@
+include:meta
+include:telegram
+include:youtube
+include:bbc
+
+
+
+play.googleapis.com #Google Play
+play-fe.googleapis.com #Google Play
+googleapis.com #Google Play
+apis.google.com #Google Play
+gvt1.com #Google Play
+app-measurement.com #Google Play
+gstatic.com #Google Play
+
+
+radiofarda.com
+manototv.com
+iranintl.com
+voanews.com
+gooya.com
+
+# data from https://github.com/filteryab/ir-blocked-domain
+include:hiddify-ir-filteryab
