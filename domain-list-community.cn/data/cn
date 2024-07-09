@@ -1,0 +1,4 @@
+# This list is for backward compatibility of "geosite:cn" in V2Ray.
+cn.2oo.uk
+include:tld-cn
+include:geolocation-cn
